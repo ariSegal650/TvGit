@@ -1,0 +1,23 @@
+.movieStyle{
+    display: grid;
+    justify-items: center;
+}
+.img{
+    width: 15rem;
+    margin-top: 20px;
+}
+.img img{
+    width: 100%;
+    height: auto;
+}
+.tag{
+    display: flex;
+}
+.content{
+    display: grid;
+    justify-items: center;
+    width: 82%;
+}
+.content p{
+    margin-top: 13px;
+}

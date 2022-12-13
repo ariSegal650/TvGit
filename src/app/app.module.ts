@@ -1,16 +1,42 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PrintMoviesComponent } from './components/print-movies/print-movies.component';
+import { HeaderComponent } from './components/header/header.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
+import {SplitButtonModule} from 'primeng/splitbutton';
+import {ButtonModule} from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { FormsModule } from '@angular/forms';
+import {PaginatorModule} from 'primeng/paginator';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PrintMoviesComponent,
+    HeaderComponent,
+    MovieDetailsComponent,
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    MatCardModule,
+    MatIconModule,
+    AccordionModule,
+    SplitButtonModule,
+    ButtonModule,
+    BrowserAnimationsModule,
+    ToastModule,
+    FormsModule,
+    PaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,33 @@
+<div class="p-inputgroup">
+  <button (click)="SearchF()" type="button" pButton pRipple label="Search"></button>
+  <input type="text" pInputText placeholder="Keyword" [(ngModel)]="SerchType">
+</div>
+<div class="search">
+  <p-splitButton label="Short By" icon="pi" (onClick)="save('info')" [model]="items"
+    styleClass="p-button-rounded mr-2 mb-2">
+  </p-splitButton>
+</div>
+<div class="MoviesFlex">
+  <div *ngFor="let item of allMovies; let i=index" >
+
+    <div class="card">
+      <a routerLink="/details/{{item.id}}/{{item.media_type}}">
+        <div class="img">
+          <img src="https://image.tmdb.org/t/p/w500/{{item.poster_path}}" *ngIf="item.poster_path; else img2">
+          <ng-template #img2>
+            <img src="https://image.tmdb.org/t/p/w500/{{item.profile_path}}">
+          </ng-template>
+        </div>
+        <div class="content">
+          <p>{{item.title}}</p>
+          <p>{{item.original_name}}</p>
+         
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+ <p-paginator  [rows]="10" [totalRecords]="120"  (onPageChange)="pagaNumFunc($event,true)"></p-paginator>
