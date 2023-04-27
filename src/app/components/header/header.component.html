@@ -1,39 +1,29 @@
 <div class="headerStyle">
     <div class="logo">
-        <p>TvKosher</p>
+        <p>Tv</p>
     </div>
-    <div class="search">
-        
-    </div>
+   <div></div>
     <div class="icons">
-        <a routerLink="main" routerLinkActive="router-link-active" ><mat-icon >home</mat-icon></a>
+        <a routerLink="main" routerLinkActive="router-link-active" >
+            <mat-icon>home</mat-icon>
+        </a>
 
        <ul>
        <a (click)="openLanguage()"> <li> <mat-icon>language</mat-icon></li></a>
         
         <div *ngIf="langugeChange" class="list">
             <li (click)="changeL('en')" > English <img
-                src="../../../assets/images/flagUsa.jpg" alt=""></li>
+                src="../../../flagUsa.jpg" alt=""></li>
             <li (click)="changeL('he')" >Hebrew <img
-                src="../../../assets/images/glagIsrael.jpg" alt=""></li>
+                src="../../../glagIsrael.jpg" alt=""></li>
           </div>
        </ul> 
 
         <mat-icon>account_circle</mat-icon>
     </div>
 </div>
-<!-- <div class="languge">
-    <p>{{'select a languge'}} </p>
-    <ul>
-      <li class="haderL" (click)="openL()">{{languge}} <img src={{imglanguge}}>
-        <mat-icon>keyboard_arrow_down</mat-icon>
-      </li>
-      <div *ngIf="langugeChange" class="list">
-        <li (click)="changeL('en')" [ngClass]="{'selectOne':languge=='English'}"> English <img
-            src="../../../assets/images/flagUsa.jpg" alt=""></li>
-        <li (click)="changeL('he')" [ngClass]="{'selectOne':languge=='Hebrew'}">Hebrew <img
-            src="../../../assets/images/glagIsrael.jpg" alt=""></li>
-      </div>
-    </ul>
-
-  </div> -->
+<div class="search">
+    <div class="p-inputgroup">
+        <button routerLink="/search/{{searchInput}}/{{page}}" type="button" pButton pRipple label="Search"></button>
+        <input type="text" pInputText placeholder="Keyword" [(ngModel)]="searchInput">         
+</div>

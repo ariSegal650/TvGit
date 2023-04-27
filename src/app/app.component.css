@@ -1,0 +1,46 @@
+.thisalert{
+    position: fixed;
+    justify-content: center;
+    display: flex;
+    z-index: 1;
+    width: 100vw;
+}
+.thisalert div{
+    background: #151a30;
+    margin-top: 10px;
+    display: flex;
+    position: relative;
+    border-radius: 15px;
+    color: white;
+    font-size: large;
+    padding: 45px;
+    display: flex;
+    max-width: 90%;
+}
+.thisalert div a{
+    justify-self: end; 
+    display: grid;
+    height: 100%;
+    align-items: start;
+    position: relative;
+    bottom: 35px;
+    cursor: pointer;
+    left: 20px;
+
+}
+.thisalert {
+    animation-name: enter;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+  }
+  
+@keyframes enter {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

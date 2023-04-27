@@ -1,0 +1,110 @@
+.main {
+    background-color: black;
+    min-height: 100vh;
+}
+.printMovie,.PrintTv{
+    display: grid;
+}
+.header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 20px 5px 0 35px;
+    align-items: center;
+}
+.header button,.header button{
+    justify-self: end;
+    margin-right: 15px;
+}
+.header p,.header p{
+    color: #ff9600;
+    font-size: 1.6rem;
+}
+
+.AllMovieFlex,.AllTvFlex {
+    display: flex;
+    overflow-x: scroll;
+    padding-top: 20px;
+}
+
+
+.card {
+    margin: 5px;
+    width: 11rem;
+    animation-name: enter;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes enter {
+    0% {
+        opacity: 0;
+        transform: translatex(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translatex(0);
+    }
+}
+
+.img {
+    width: 10rem;
+}
+
+.img img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.play {
+    display: none;
+}
+
+.card:hover .play {
+    display: grid;
+    position: relative;
+    width: 10rem;
+    bottom: 150px;
+}
+
+.play .back {
+    height: 146px;
+    position: absolute;
+    width: inherit;
+    background-color: rgba(255, 255, 255, 0.799);
+
+}
+
+.play .icon {
+    left: 55px;
+    position: absolute;
+    top: 41px;
+    color: cadetblue;
+
+}
+
+.play .icon mat-icon {
+    font-size: 53px;
+    height: auto;
+    width: auto;
+    color: #ff9600;
+}
+
+.content p {
+    color: #ff9600;
+
+}
+
+a {
+    text-decoration: none;
+}
+@media(max-width:600px) {
+    .header{
+        margin: 20px 5px 0 10px;
+      
+    }
+    .header p{
+        font-size: 1.2rem;
+    }
+}

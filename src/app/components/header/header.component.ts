@@ -8,7 +8,8 @@ import { Component, HostListener } from '@angular/core';
 export class HeaderComponent {
 a:number=0;
   langugeChange: boolean;
-
+  searchInput:string='';
+  page:number=1
   constructor() {
     this.langugeChange = false;
 
@@ -30,9 +31,7 @@ a:number=0;
   @HostListener('document:click')
   clickout() {
     if (this.langugeChange==true &&this.a!=1) {
-      this.langugeChange = false;
-      console.log(88);
-      
+      this.langugeChange = false;      
     }
     else{
       this.a=0;

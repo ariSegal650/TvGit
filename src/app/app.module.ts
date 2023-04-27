@@ -15,6 +15,9 @@ import { ToastModule } from 'primeng/toast';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { FormsModule } from '@angular/forms';
 import {PaginatorModule} from 'primeng/paginator';
+import { MainComponent } from './components/main/main.component';
+import { PrintTvComponent } from './components/print-tv/print-tv.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import {PaginatorModule} from 'primeng/paginator';
     PrintMoviesComponent,
     HeaderComponent,
     MovieDetailsComponent,
+    MainComponent,
+    PrintTvComponent,
+    FooterComponent,
     
   ],
   imports: [
