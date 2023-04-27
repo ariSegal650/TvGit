@@ -1,17 +1,41 @@
 <div *ngIf="avielble" class="movieStyle">
-    <div class="img">
-        <img src="https://image.tmdb.org/t/p/original{{movieD.poster_path}}" *ngIf="movieD.poster_path; else img2">
-        <ng-template #img2>
-          <img src="https://image.tmdb.org/t/p/original{{movieD.profile_path}}">
-        </ng-template>
-    </div>
-    <div class="tag">
-        <!-- <div *ngFor="let t of movieD.genres">
-            {{t.name}}
-        </div> -->
-    </div>
+
     <div class="content">
-        <h3>{{movieD.original_title}}</h3>
-        <p>{{movieD.overview}}</p>
+
+
+        <div class="overview">
+            <h3>{{movieD.original_title}}</h3>
+            <p>Summary: {{movieD.overview}}</p>
+
+
+            <div class="tag">
+                <div> genre:
+                    <div *ngFor="let t of movieD.genres">
+                        {{t.name}},
+                    </div>
+                </div>
+            </div>
+            <div class="data">
+                Release Date: {{movieD.release_date}}{{movieD.first_air_date}}
+            </div>
+        </div>
+        <div *ngIf="avielbleVideo" class="iframe-container">
+            <iframe width="560" height="315" [src]="video" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+
     </div>
+    <div class="imgFlex">
+        <div class="img">
+            <img src="https://image.tmdb.org/t/p/original{{movieD.poster_path}}" *ngIf="movieD.poster_path; else img2">
+            <ng-template #img2>
+                <img src="https://image.tmdb.org/t/p/original{{movieD.profile_path}}">
+            </ng-template>
+        </div>
+
+    </div>
+
+
 </div>

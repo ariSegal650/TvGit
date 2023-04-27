@@ -1,0 +1,78 @@
+<div class="main">
+
+    <div class="welcome">
+
+    </div>
+    <div class="printMovie">
+        <div class="header">
+            <p>the popular movies</p>
+            <button routerLink="/movies" pButton pRipple type="button" label="All the movies"
+                class="p-button-raised">
+            </button>
+        </div>
+        <div class="AllMovieFlex">
+            <div class="movie" *ngFor="let item of allMovies">
+                <div class="card">
+                    <a routerLink="/details/{{item.id}}/{{item.media_type}}">
+                        <div class="img">
+                            <img src="https://image.tmdb.org/t/p/w500/{{item.poster_path}}"
+                                *ngIf="item.poster_path; else img2">
+                            <ng-template #img2>
+                                <img src="https://image.tmdb.org/t/p/w500/{{item.profile_path}}">
+                            </ng-template>
+                        </div>
+                        <div class="play">
+                            <div class="back">
+                                <div class="icon">
+
+                                    <mat-icon>play_circle_outline</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <p>{{item.title}}</p>
+                            <p>{{item.original_name}}</p>
+
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="PrintTv">
+        <div class="header">
+        <p > the popular Tv</p>
+        <button routerLink="/tv" pButton pRipple type="button" label="All the Tv" class="p-button-raised"></button>
+        </div>
+        <div class="AllTvFlex">
+            <div class="Tv" *ngFor="let item of allTv">
+                <div class="card">
+                    <a routerLink="/details/{{item.id}}/tv">
+                        <div class="img">
+                            <img src="https://image.tmdb.org/t/p/w500/{{item.poster_path}}"
+                                *ngIf="item.poster_path; else img2">
+                            <ng-template #img2>
+                                <img src="https://image.tmdb.org/t/p/w500/{{item.backdrop_path}}">
+                            </ng-template>
+                        </div>
+                        <div class="play">
+                            <div class="back">
+                                <div class="icon">
+
+                                    <mat-icon>play_circle_outline</mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <!-- <p>{{item.overview}}</p> -->
+                            <p>{{item.original_name}}</p>
+
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

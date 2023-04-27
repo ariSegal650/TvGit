@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { movieDeatails } from 'src/app/models/movieT';
 import { GetMoviesService } from 'src/app/services/get-movies.service';
 
 @Component({
@@ -10,37 +10,40 @@ import { GetMoviesService } from 'src/app/services/get-movies.service';
 })
 export class MovieDetailsComponent {
   id: string;
-  media_type: string;
+  video: any;
+  media_type: string = "movie";
   avielble: boolean = false;
+  avielbleVideo: boolean = false;
   movieD: any
-  constructor(private route: ActivatedRoute, private GetMovieService: GetMoviesService) {
+  constructor(private route: ActivatedRoute, private GetMovieService: GetMoviesService, private sanitizer: DomSanitizer) {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.media_type = this.route.snapshot.paramMap.get('media_type')
     console.log(this.id);
-    if (this.media_type !=null) { this.getDatasearch(); }
-   else if (this.id != "") { this.getDataMovie() };
-   
+    if (this.route.snapshot.paramMap.get('media_type')) { this.media_type = this.route.snapshot.paramMap.get('media_type'); }
+    //else if (this.id != "") { this.getDataMovie() };
+    this.getDataMovie();
+
   }
+
   async getDataMovie() {
-    await this.GetMovieService.getAllDetails1(this.id).subscribe(h => {
+    await this.GetMovieService.getAllDetails(this.id, this.media_type).subscribe(h => {
       this.movieD = h;
-      console.log(this.movieD);
-      this.avielble = true
-
-    })
-    await this.GetMovieService.getVidow(this.id).subscribe(v=>{
-      console.log(v);
-      console.log(587);
-      
-    })
+      this.avielble = true;
+      this.getVideo();
+    }, (error => {
+      console.error('Request failed with error')
+    }))
   }
-  async getDatasearch() {
-    await this.GetMovieService.getAllDetails(this.id,this.media_type).subscribe(h => {
-      this.movieD = h;
-      console.log(this.movieD);
-      this.avielble = true
-
-    })
-  }
+  async getVideo() {
+    this.GetMovieService.getVideo(this.id, this.media_type).subscribe(v => {
+      if (v.results[0] != null) {
+        
+        this.video = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + v.results[0].key);
+        this.avielbleVideo = true
+      }
+      }, (error => {
+        console.error('Request failed with error')
+      }))
+  
+}
 
 }

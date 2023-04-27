@@ -1,0 +1,92 @@
+.TvFlex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* // margin: 30px 0 10px 0;  */
+    background-color: #232323;
+}
+
+p-splitButton::ng-deep .p-button-rounded::ng-deep .p-element::ng-deep .ng-trigger {
+    width: 10.5rem;  
+}
+.search {
+    display: flex;
+    justify-content: end;
+    margin-right: 15px;
+    margin-top: 15px;
+    width: 95%;
+    
+} 
+.card {
+    margin: 5px;
+    width: 11rem;
+    animation-name: enter;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes enter {
+    0% {
+        opacity: 0;
+        transform: translatex(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translatex(0);
+    }
+}
+
+.img {
+    width: 10rem;
+}
+
+.img img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.play{
+    display: none;
+}
+.card:hover .play{
+    display: grid;
+    position: relative;
+    width: 10rem;
+    bottom: 150px;
+}
+.play .back{
+    height: 146px;
+    position: absolute;
+    width: inherit;
+    background-color: rgba(255, 255, 255, 0.799);
+
+}
+.play .icon{
+    left: 55px;
+    position: absolute;
+    top: 41px;
+    color: cadetblue;
+
+}
+.play .icon mat-icon{
+    font-size: 53px;
+    height: auto;
+    width: auto;
+    color: #ff9600;
+}
+.content p{
+    color: #ff9600;
+    
+}
+a{
+    text-decoration: none;
+}
+
+p-paginator::ng-deep .p-paginator{
+    background-color: #232323;
+}
+p-paginator::ng-deep .p-paginator .p-paginator-pages button{
+    color: white;
+}

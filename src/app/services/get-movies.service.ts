@@ -1,41 +1,88 @@
+import { transition } from '@angular/animations';
 import { NgIfContext } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { MovieTypes } from '../models/movieT';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetMoviesService {
-  movie: BehaviorSubject<MovieTypes>;
- // public pageNum:number=1;
+  movie: BehaviorSubject<object>;
+  tv: BehaviorSubject<object>;
+
   constructor(private http: HttpClient) {
-   // this.movie = new BehaviorSubject(this.http.get("https://api.themoviedb.org/3/discover/movie?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate"));
-
-
+    this.tv = new BehaviorSubject({ page: 0, results: [], total_pages: 0, total_results: 0 });
+    this.movie = new BehaviorSubject({ page: 0, results: [], total_pages: 0, total_results: 0 });
   }
 
-  getMovie(pageNum): Observable<any>{
-   
-    return this.http.get("https://api.themoviedb.org/3/discover/movie?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page="+pageNum+"&with_watch_monetization_types=flatrate");
-   //return this.movie.getValue()
+  ///movie//
+  followMovie(): Observable<any> {
+  return this.movie
   }
-  getAllDetails(id:string,media_type:string):Observable<any>{
-    return this.http.get("https://api.themoviedb.org/3/"+media_type+"/"+id+"?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US")
-                         
+
+  getPopularMovies(pageNum: number): Observable<any> {
+    this.http.get("https://api.themoviedb.org/3/trending/movie/week?api_key=1e49ce8a1c5569898e58701cafb843d3&page=" + pageNum).subscribe(m => {
+      this.movie.next(m)
+    })
+    return this.movie;
   }
-  getAllDetails1(id:string):Observable<any>{
-    return this.http.get("https://api.themoviedb.org/3/movie/"+id+"?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US")
-                         
+
+  async getMovieDiscover(pageNum) {
+    await this.http.get("https://api.themoviedb.org/3/discover/movie?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=" + pageNum + "&with_watch_monetization_types=flatrate").subscribe(m => {
+      this.movie.next(m);
+    });
+
   }
-  getPopularMovies(pageNum:number):Observable<any>{
-    return this.http.get("https://api.themoviedb.org/3/trending/movie/week?api_key=1e49ce8a1c5569898e58701cafb843d3&page="+pageNum)
+
+  async getTop_rated(pageNum: number) {
+    await this.http.get("https://api.themoviedb.org/3/movie/top_rated?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US&page=" + pageNum).subscribe(m => {
+      this.movie.next(m)
+    })
   }
-  getSearch(serch:string,pageNum:number):Observable<any>{
-    return this.http.get("https://api.themoviedb.org/3/search/multi?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US&query="+serch+"&page="+pageNum+"&include_adult=false")
+
+  //Tv///
+
+  followTv(): Observable<any> {
+    return this.tv;
   }
-  getVidow(id){
-    return this.http.get("https://api.themoviedb.org/3/movie/"+id+"/videos?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US")
+
+  getPopularTv(pageNum: number): Observable<any> {
+    this.http.get("https://api.themoviedb.org/3/tv/popular?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US&page=" + pageNum).subscribe(t => {
+      this.tv.next(t);
+    });
+    return this.tv;
+  }
+
+  async getTop_ratedTv(pageNum: number) {
+    await this.http.get("https://api.themoviedb.org/3/tv/top_rated?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US&page=" + pageNum).subscribe(t => {
+      this.tv.next(t);
+    });
+  }
+  async getAiring_today(pageNum: number) {
+    await this.http.get("https://api.themoviedb.org/3/tv/airing_today?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US&page=" + pageNum).subscribe(t => {
+      this.tv.next(t);
+    });
+  }
+  async getNewTv(pageNum: number) {
+    await this.http.get("https://api.themoviedb.org/3/tv/latest?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US").subscribe(t => {
+      this.tv.next(t);
+    });
+  }
+
+
+  async getSearch(serch: string, pageNum: number) {
+   await  this.http.get("https://api.themoviedb.org/3/search/multi?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US&query=" + serch + "&page=" + pageNum + "&include_adult=false").subscribe(s=>{
+      this.movie.next(s);
+     })
+  }
+  getVideo(id: string, media_type: string): Observable<any> {
+    return this.http.get("https://api.themoviedb.org/3/" + media_type + "/" + id + "/videos?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US")
+       
+  }
+  
+  getAllDetails(id: string, media_type: string): Observable<any> {
+    return this.http.get("https://api.themoviedb.org/3/" + media_type + "/" + id + "?api_key=1e49ce8a1c5569898e58701cafb843d3&language=en-US")
   }
 }
